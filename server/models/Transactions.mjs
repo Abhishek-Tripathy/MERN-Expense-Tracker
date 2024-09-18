@@ -21,6 +21,7 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       enum: [
         "Food",
+        "Work",
         "Transportation",
         "Entertainment",
         "Shopping",

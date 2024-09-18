@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import { usersRoute } from './routes/user/usersRoute.mjs'
 import { accountsRoute } from './routes/accounts/accountsRoute.mjs'
 import { transactionRoute } from './routes/transactions/transactionRoutes.mjs'
+import cors from 'cors'
 
 
 dotenv.config()
@@ -18,6 +19,8 @@ mongoose.connect(MONGODB_URI)
 
 
 app.use(express.json())
+
+app.use(cors())
 
 //routes : user
 app.use('/api/v1/users', usersRoute)

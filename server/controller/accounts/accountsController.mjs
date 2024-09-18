@@ -27,7 +27,6 @@ export const createAccountCtrl = async(req, res) => {
 
       res.status(201).json({status: true, message: account})
    } catch (error) {
-      console.error("Error at account Creattion" , error)
       res.json(error)
    }
 }

@@ -27,7 +27,7 @@ export const registerUserCtrl = async(req, res, next) => {
          password: hashedPassword,
       })
 
-      res.status(200).json({status: 'success', fullname: user.fullname, id: user._id, email: user.email})
+      res.status(200).json({status: true, fullname: user.fullname, id: user._id, email: user.email})
    } catch (error) {
       console.error(error)
       
@@ -41,13 +41,14 @@ export const loginUserCtrl = async(req, res) => {
    try {
    // Chech if email exists
       const userFound = await User.findOne({email})
-      if(!userFound) return res.json({status: 400, message: "Invalid login credentials"})
+      if(!userFound) return res.status(400).json({status: false, message: "Invalid login credentials"})
 
    // Check if Password exists
       const isPAsswordMatched = await bcrypt.compare(password, userFound.password)
-      if(!isPAsswordMatched) return next(new Error("Invalid login credentials"))
+      if(!isPAsswordMatched) return res.status(400).json({status: false, message: "Invalid login credentials"})
 
-      res.json({status: 'success', 
+
+      res.status(200).json({status: true , 
          fullname: userFound.fullname, 
          id: userFound._id, 
          token: generateToken(userFound._id),

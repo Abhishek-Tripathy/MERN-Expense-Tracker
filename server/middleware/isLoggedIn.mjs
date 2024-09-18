@@ -9,7 +9,7 @@ export const isLoggedIn = (req, res, next) => {
    //save the user into req obj
    req.user = decodedUser.id
 
-   if(!decodedUser) return res.json({status: false, message: "Token expired, Login again"})
+   if(!decodedUser) return res.status(400).json({status: false, message: "Token expired, Login again"})
 
    next()
 }
